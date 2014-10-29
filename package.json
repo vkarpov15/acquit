@@ -1,0 +1,19 @@
+{
+  "name": "bdd-dox",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "2.5.0",
+    "esprima": "1.2.2",
+    "underscore": "1.5.2"
+  },
+  "devDependencies": {
+    "mocha": "2.0.1"
+  }
+}
