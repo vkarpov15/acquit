@@ -8,6 +8,7 @@ describe('Basic functionality', function() {
 
     var ret = bddDox.parse(contents);
 
+    //console.log(ret);
     assert.equal(1, ret.length);
     assert.equal('describe', ret[0].type);
     assert.equal(1, ret[0].comments.length);
@@ -23,7 +24,7 @@ describe('ES6', function() {
   it('can parse ES6 yield keywords', function() {
     var contents = fs.readFileSync('./test/data/es6_sample.js').toString();
 
-    var ret = bddDox(contents);
+    var ret = bddDox.parse(contents);
 
     assert.equal(1, ret.length);
     assert.equal('describe', ret[0].type);
@@ -33,6 +34,24 @@ describe('ES6', function() {
     assert.equal(1, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code);
 
-    console.log(bddDox.generate(ret));
   });
 });
+
+describe('Generating HTML', function(){
+  it('generates documentation for larger sets of tests', function(done){
+    var contents = fs.readFileSync('./test/data/browser_test.js').toString();
+
+    var ret = bddDox.parse(contents);
+    toHTML = bddDox.generateHTML(ret);
+    try {
+      fs.writeFile('./docs/docs.html', toHTML);
+
+    }
+    catch(e){
+      console.log("error");
+      done(e);
+    }
+
+  });
+});
+
