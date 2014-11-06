@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "2.5.0",
-    "esprima": "1.2.2",
+    "esprima": "https://github.com/ariya/esprima/archive/28b2eafeca60b43a32650bc066524de6147adc95.tar.gz",
     "underscore": "1.5.2"
   },
   "devDependencies": {
