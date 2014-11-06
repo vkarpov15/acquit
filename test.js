@@ -10,6 +10,8 @@ describe('Basic functionality', function() {
 
     assert.equal(1, ret.length);
     assert.equal('describe', ret[0].type);
+    assert.equal(1, ret[0].comments.length);
+    assert.ok(ret[0].comments[0].indexOf('`Model`') != -1);
     assert.equal(1, ret[0].blocks.length);
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(1, ret[0].blocks[0].comments.length);
