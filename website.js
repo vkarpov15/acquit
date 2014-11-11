@@ -24,7 +24,7 @@ var jadeify = function (filename, doc_filepath, options) {
   options.klass = klass;
   var fullpath = doc_filepath + "/" + filename;
   var jade_file = filename.replace('.html', '.jade');
-  fs.writeFile(doc_filepath + "/" + jade_file, 'extends layout \nblock content\n    include' + filename, function(err){
+  fs.writeFile(doc_filepath + "/" + jade_file, 'extends layout \nblock content\n    include ' + filename, function(err){
     jade.renderFile(doc_filepath + "/" + jade_file, options, function (err, str) {
       if (err) return console.error(err.stack);
       fs.writeFile(fullpath, str, function (err) {
@@ -39,15 +39,16 @@ var generateDocs = function(test_filepath, doc_filepath, options){
   // find all the files
   fs.readdir(test_filepath, function(err, files){
     _.each(files, function(file){
+      console.log(file);
       if (file.split('.')[1] == 'js') {
         // create the file? or
-        render_name = file.replace('.js', '.html');
-        console.log(render_name);
+        var render_name = file.replace('.js', '.html');
         var contents = fs.readFileSync(test_filepath + '/' + file).toString();
         var ret = bddDox.parse(contents);
-        toHTML = bddDox.generateHTML(ret);
+        var toHTML = bddDox.generateHTML(ret);
         fs.unlink(doc_filepath + '/docs.html', function (err) {
-          fs.writeFile(doc_filepath + '/docs.html', toHTML, function (err) {
+          fs.writeFile(doc_filepath + '/' + render_name, toHTML, function (err) {
+            console.log(render_name);
             jadeify(render_name, doc_filepath);
           });
 
