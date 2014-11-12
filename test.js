@@ -50,5 +50,6 @@ describe('Generating HTML', function(){
     );
 
   });
+
 });
 
