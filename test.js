@@ -43,14 +43,11 @@ describe('Generating HTML', function(){
 
     var ret = bddDox.parse(contents);
     toHTML = bddDox.generateHTML(ret);
-    try {
-      fs.writeFile('./docs/docs.html', toHTML);
-
-    }
-    catch(e){
-      console.log("error");
-      done(e);
-    }
+    assert.doesNotThrow( function() {
+        fs.writeFile('./docs/docs.html', toHTML);
+        done()
+      }
+    );
 
   });
 });

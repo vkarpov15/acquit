@@ -35,11 +35,10 @@ var jadeify = function (filename, doc_filepath, options) {
   });
 };
 
-var generateDocs = function(test_filepath, doc_filepath, options){
+var generateTestDocs = function(test_filepath, doc_filepath, options){
   // find all the files
   fs.readdir(test_filepath, function(err, files){
     _.each(files, function(file){
-      console.log(file);
       if (file.split('.')[1] == 'js') {
         // create the file? or
         var render_name = file.replace('.js', '.html');
@@ -48,7 +47,6 @@ var generateDocs = function(test_filepath, doc_filepath, options){
         var toHTML = bddDox.generateHTML(ret);
         fs.unlink(doc_filepath + '/docs.html', function (err) {
           fs.writeFile(doc_filepath + '/' + render_name, toHTML, function (err) {
-            console.log(render_name);
             jadeify(render_name, doc_filepath);
           });
 
@@ -63,5 +61,5 @@ var generateDocs = function(test_filepath, doc_filepath, options){
 
 };
 
-generateDocs('./test/data', './docs');
+module.exports.generateTestDocs = generateTestDocs;
 
