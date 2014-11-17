@@ -11,6 +11,7 @@
   "dependencies": {
     "commander": "2.5.0",
     "esprima": "https://github.com/ariya/esprima/archive/85fc2f4b6ad109a86d80d9821f52b5b38d0105c0.tar.gz",
+    "marked": "0.3.2",
     "underscore": "1.5.2"
   },
   "devDependencies": {
