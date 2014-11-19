@@ -37,19 +37,3 @@ describe('ES6', function() {
   });
 });
 
-describe('Generating HTML', function(){
-  it('generates documentation for larger sets of tests', function(done){
-    var contents = fs.readFileSync('./test/data/browser_test.js').toString();
-
-    var ret = bddDox.parse(contents);
-    toHTML = bddDox.generateHTML(ret);
-    assert.doesNotThrow( function() {
-        fs.writeFile('./docs/docs.html', toHTML);
-        done()
-      }
-    );
-
-  });
-
-});
-
