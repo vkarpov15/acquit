@@ -1,13 +1,17 @@
 {
   "name": "acquit",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Parse BDD-style tests (Mocha, Jasmine) to generate documentation",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Valeri Karpov",
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vkarpov15/acquit.git"
+  },
   "dependencies": {
     "commander": "2.5.0",
     "esprima": "https://github.com/ariya/esprima/archive/85fc2f4b6ad109a86d80d9821f52b5b38d0105c0.tar.gz",
