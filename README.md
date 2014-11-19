@@ -1,4 +1,4 @@
 acquit
 =======
 
-Generate documentation from Mocha tests
+Parse BDD-style tests (Mocha, Jasmine) to generate documentation
