@@ -1,12 +1,12 @@
 var assert = require('assert');
 var fs = require('fs');
-var bddDox = require('./lib');
+var acquit = require('./lib');
 
 describe('Basic functionality', function() {
   it('can provide basic results', function() {
     var contents = fs.readFileSync('./test/data/sample.js').toString();
 
-    var ret = bddDox.parse(contents);
+    var ret = acquit.parse(contents);
 
     //console.log(ret);
     assert.equal(1, ret.length);
@@ -24,7 +24,7 @@ describe('ES6', function() {
   it('can parse ES6 yield keywords', function() {
     var contents = fs.readFileSync('./test/data/es6_sample.js').toString();
 
-    var ret = bddDox.parse(contents);
+    var ret = acquit.parse(contents);
 
     assert.equal(1, ret.length);
     assert.equal('describe', ret[0].type);
