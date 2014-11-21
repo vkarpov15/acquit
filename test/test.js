@@ -1,6 +1,6 @@
 var assert = require('assert');
 var fs = require('fs');
-var acquit = require('./lib');
+var acquit = require('../lib');
 
 describe('Basic functionality', function() {
   it('can provide basic results', function() {
@@ -37,3 +37,12 @@ describe('ES6', function() {
   });
 });
 
+describe('The `trimEachLine()` function', function() {
+  it('strips out whitespace and asterisks in multiline comments', function() {
+    var str = '  * This comment looks like a \n' +
+      '  * parsed JSdoc-style comment';
+
+    assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
+      'parsed JSdoc-style comment');
+  });
+});

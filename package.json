@@ -4,7 +4,7 @@
   "description": "Parse BDD-style tests (Mocha, Jasmine) to generate documentation",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test.js"
+    "test": "./node_modules/mocha/bin/mocha test/test.js"
   },
   "author": "Valeri Karpov",
   "license": "Apache 2.0",
