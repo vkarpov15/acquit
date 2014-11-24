@@ -4,7 +4,19 @@ var acquit = require('../lib');
 
 describe('Basic functionality', function() {
   it('can provide basic results', function() {
-    var contents = fs.readFileSync('./test/data/sample.js').toString();
+    var contents =
+      '/**\n' + 
+      ' * A `Model` is a convenience wrapper around objects stored in a\n' +
+      ' * collection\n' +
+      ' */\n' +
+      'describe(\'Model\', function() {\n' +
+      '  /**\n' +
+      '   * Model **should** be able to save stuff\n' +
+      '   **/\n' +
+      '  it(\'can save\', function() {\n' +
+      '    assert.ok(1);\n' +
+      '  });\n' +
+      '});';
 
     var ret = acquit.parse(contents);
 
@@ -22,7 +34,15 @@ describe('Basic functionality', function() {
 
 describe('ES6', function() {
   it('can parse ES6 yield keywords', function() {
-    var contents = fs.readFileSync('./test/data/es6_sample.js').toString();
+    var contents =
+      'describe(\'ES6\', function() {\n' +
+      '  // ES6 has a `yield` keyword\n' +
+      '  it(\'should be able to yield\', function() {\n' +
+      '    co(function*() {\n' +
+      '      yield 1;\n' +
+      '    })();\n' +
+      '  });\n' +
+      '});';
 
     var ret = acquit.parse(contents);
 
