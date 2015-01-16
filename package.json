@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test/test.js"
   },
-  "author": "Valeri Karpov",
+  "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
   "repository": {
     "type": "git",
@@ -18,7 +18,13 @@
     "marked": "0.3.2",
     "underscore": "1.5.2"
   },
+  "jscsConfig": {
+    "preset": "airbnb",
+    "requireMultipleVarDecl": null,
+    "disallowMultipleVarDecl": true
+  },
   "devDependencies": {
+    "jscs": "1.9.0",
     "mocha": "2.0.1"
   }
 }
