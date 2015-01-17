@@ -21,6 +21,9 @@ describe('`acquit.parse()`', function() {
       '  it(\'can save\', function() {\n' +
       '    assert.ok(1);\n' +
       '  });\n' +
+      '\n' +
+      '  it(\'can save with a parameter\', function() {\n' +
+      '  });\n' +
       '});';
 
     var ret = acquit.parse(contents);
@@ -33,10 +36,15 @@ describe('`acquit.parse()`', function() {
 
     // Top-level block contains the `it('can save')` block, which contains
     // the code
-    assert.equal(1, ret[0].blocks.length);
+    assert.equal(2, ret[0].blocks.length);
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(1, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code.indexOf('assert.ok(1)') !== -1);
+    assert.equal('can save', ret[0].blocks[0].contents);
+
+    assert.equal('it', ret[0].blocks[1].type);
+    assert.equal('can save with a parameter', ret[0].blocks[1].contents);
+    assert.equal(0, ret[0].blocks[1].comments.length);
   });
 
   /**
