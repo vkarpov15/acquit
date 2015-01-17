@@ -76,4 +76,15 @@ describe('`acquit.trimEachLine()`', function() {
     assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
       'parsed JSdoc-style comment');
   });
+
+  /**
+   * You don't have to use JSdoc-style comments: `trimEachLine()` also trims
+   * leading and trailing whitespace. */
+  it('strips out whitespace and asterisks in multiline comments', function() {
+    var str = 'This comment looks like a \n' +
+      '  * parsed JSdoc-style comment';
+
+    assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
+      'parsed JSdoc-style comment');
+  });
 });
