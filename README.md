@@ -2,6 +2,8 @@
 
 Parse BDD-style tests (Mocha, Jasmine) to generate documentation
 
+[![Build Status](https://travis-ci.org/vkarpov15/acquit.svg?branch=master)](https://travis-ci.org/vkarpov15/acquit)
+
 ## `acquit.parse()`
 
 #### It can parse Mocha tests into `blocks`
@@ -25,6 +27,9 @@ call contains a list of "blocks", whereas an `it` call contains the actual
       '  it(\'can save\', function() {\n' +
       '    assert.ok(1);\n' +
       '  });\n' +
+      '\n' +
+      '  it(\'can save with a parameter\', function() {\n' +
+      '  });\n' +
       '});';
 
     var ret = acquit.parse(contents);
@@ -37,10 +42,15 @@ call contains a list of "blocks", whereas an `it` call contains the actual
 
     // Top-level block contains the `it('can save')` block, which contains
     // the code
-    assert.equal(1, ret[0].blocks.length);
+    assert.equal(2, ret[0].blocks.length);
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(1, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code.indexOf('assert.ok(1)') !== -1);
+    assert.equal('can save', ret[0].blocks[0].contents);
+
+    assert.equal('it', ret[0].blocks[1].type);
+    assert.equal('can save with a parameter', ret[0].blocks[1].contents);
+    assert.equal(0, ret[0].blocks[1].comments.length);
   
 ```
 
@@ -82,6 +92,21 @@ from JSdoc-style comments
 ```javascript
     
     var str = '  * This comment looks like a \n' +
+      '  * parsed JSdoc-style comment';
+
+    assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
+      'parsed JSdoc-style comment');
+  
+```
+
+#### It strips out whitespace and asterisks in multiline comments
+
+You don't have to use JSdoc-style comments: `trimEachLine()` also trims
+leading and trailing whitespace.
+
+```javascript
+    
+    var str = 'This comment looks like a \n' +
       '  * parsed JSdoc-style comment';
 
     assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +

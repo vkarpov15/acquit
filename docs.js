@@ -1,6 +1,7 @@
 var acquit = require('./lib');
 
 var md = '# acquit\n\nParse BDD-style tests (Mocha, Jasmine) to generate documentation\n\n';
+md += '[![Build Status](https://travis-ci.org/vkarpov15/acquit.svg?branch=master)](https://travis-ci.org/vkarpov15/acquit)\n\n';
 
 var blocks = acquit.parse(require('fs').readFileSync('./test/test.js').toString());
 
