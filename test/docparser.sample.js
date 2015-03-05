@@ -3,6 +3,7 @@
  */
 
 var _ = require('underscore');
+var STATES = ['good', 'bad'];
 
 /**
  * A [node-mongodb-native](https://github.com/mongodb/node-mongodb-native)
@@ -13,18 +14,21 @@ var _ = require('underscore');
  */
 
 function NativeConnection() {
-  MongooseConnection.apply(this, arguments);
   this._listening = false;
 }
 
 /**
  * Expose the possible connection states.
  *
+ * ### Examples
  * ```
- * var a = b;
+ * var conn = new NativeConnection();
+ * assert.deepEqual(['good', 'bad'], conn.STATES);
  * ```
  *
  * @api public
  */
 
 NativeConnection.prototype.STATES = STATES;
+
+module.exports = NativeConnection;
