@@ -10,7 +10,7 @@ describe('`acquit.parse()`', function() {
    * `code` in order to provide an effective, well-tested example. */
   it('can parse Mocha tests into `blocks`', function() {
     var contents =
-      '/**\n' + 
+      '/**\n' +
       ' * A `Model` is a convenience wrapper around objects stored in a\n' +
       ' * collection\n' +
       ' */\n' +
@@ -48,10 +48,31 @@ describe('`acquit.parse()`', function() {
   });
 
   /**
+   * Acquit can also take a callback as second parameter
+   */
+  it('can call user function on `code` block and save return value', function() {
+    var contents =
+      'describe(\'ES6\', function() {\n' +
+      '  // ES6 has a `yield` keyword\n' +
+      '  it(\'should be able to yield\', function() {\n' +
+      '    // some code\n' +
+      '  });\n' +
+      '});';
+
+    var cb = function(block) {
+      block.code = 'return value from callback';
+    };
+
+    var ret = acquit.parse(contents, cb);
+
+    assert.equal('return value from callback', ret[0].blocks[0].code);
+  });
+
+  /**
    * Acquit can also parse ES6 code
    */
   it('can parse the ES6 `yield` keyword', function() {
-    var contents = 
+    var contents =
       'describe(\'ES6\', function() {\n' +
       '  // ES6 has a `yield` keyword\n' +
       '  it(\'should be able to yield\', function() {\n' +

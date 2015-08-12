@@ -14,9 +14,9 @@ call contains a list of "blocks", whereas an `it` call contains the actual
 `code` in order to provide an effective, well-tested example.
 
 ```javascript
-    
+
     var contents =
-      '/**\n' + 
+      '/**\n' +
       ' * A `Model` is a convenience wrapper around objects stored in a\n' +
       ' * collection\n' +
       ' */\n' +
@@ -51,7 +51,27 @@ call contains a list of "blocks", whereas an `it` call contains the actual
     assert.equal('it', ret[0].blocks[1].type);
     assert.equal('can save with a parameter', ret[0].blocks[1].contents);
     assert.equal(0, ret[0].blocks[1].comments.length);
-  
+
+```
+
+#### Acquit can also take a callback as second parameter
+
+```javascript
+    var contents =
+    'describe(\'ES6\', function() {\n' +
+    '  // ES6 has a `yield` keyword\n' +
+    '  it(\'should be able to yield\', function() {\n' +
+    '    // some code\n' +
+    '  });\n' +
+    '});';
+
+    var cb = function(block) {
+    block.code = 'return value from callback';
+    };
+
+    var ret = acquit.parse(contents, cb);
+
+    assert.equal('return value from callback', ret[0].blocks[0].code);
 ```
 
 #### It can parse the ES6 `yield` keyword
@@ -59,8 +79,8 @@ call contains a list of "blocks", whereas an `it` call contains the actual
 Acquit can also parse ES6 code
 
 ```javascript
-    
-    var contents = 
+
+    var contents =
       'describe(\'ES6\', function() {\n' +
       '  // ES6 has a `yield` keyword\n' +
       '  it(\'should be able to yield\', function() {\n' +
@@ -79,7 +99,7 @@ Acquit can also parse ES6 code
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(1, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code);
-  
+
 ```
 
 ## `acquit.trimEachLine()`
@@ -90,13 +110,13 @@ Acquit can also parse ES6 code
 from JSdoc-style comments
 
 ```javascript
-    
+
     var str = '  * This comment looks like a \n' +
       '  * parsed JSdoc-style comment';
 
     assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
       'parsed JSdoc-style comment');
-  
+
 ```
 
 #### It strips out whitespace and asterisks in multiline comments
@@ -105,12 +125,11 @@ You don't have to use JSdoc-style comments: `trimEachLine()` also trims
 leading and trailing whitespace.
 
 ```javascript
-    
+
     var str = 'This comment looks like a \n' +
       '  * parsed JSdoc-style comment';
 
     assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
       'parsed JSdoc-style comment');
-  
-```
 
+```
