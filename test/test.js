@@ -48,7 +48,8 @@ describe('`acquit.parse()`', function() {
   });
 
   /**
-   * Acquit can also take a callback as second parameter
+   * Acquit can also take a callback as second parameter. This callback gets
+   * executed on every block and can transform the block however you want.
    */
   it('can call user function on `code` block and save return value', function() {
     var contents =
@@ -66,6 +67,35 @@ describe('`acquit.parse()`', function() {
     var ret = acquit.parse(contents, cb);
 
     assert.equal('return value from callback', ret[0].blocks[0].code);
+  });
+
+  /**
+   * Want to chain multiple callbacks together and/or develop re-usable
+   * plugins? `acquit.transform()` allows you to add transformations that
+   * are executed each time you call `.parse()`.
+   *
+   * Transform functions are executed in order **before** the callback
+   * function passed to `.parse()`.
+   */
+  it('can define transforms', function() {
+    var contents =
+      'describe(\'ES6\', function() {\n' +
+      '  // ES6 has a `yield` keyword\n' +
+      '  it(\'should be able to yield\', function() {\n' +
+      '    // some code\n' +
+      '  });\n' +
+      '});';
+
+    var cb = function(block) {
+      block.code = 'my transformed code';
+    };
+
+    acquit.transform(cb);
+
+    var ret = acquit.parse(contents);
+
+    assert.equal('my transformed code', ret[0].blocks[0].code);
+    acquit.removeAllTransforms();
   });
 
   /**
