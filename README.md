@@ -172,3 +172,30 @@ leading and trailing whitespace.
   
 ```
 
+## `acquit()` constructor
+
+#### It creates a new instance with its own set of transforms
+
+You can also use acquit as a constructor, in case you need
+multiple sets of transforms.
+
+```javascript
+    
+    acquit.transform(function(block) {});
+    assert.equal(acquit.getTransforms().length, 1);
+
+    var parser = acquit();
+    assert.equal(parser.getTransforms().length, 1);
+
+    parser.transform(function(block) {});
+    assert.equal(parser.getTransforms().length, 2);
+
+    parser.removeAllTransforms();
+    assert.equal(parser.getTransforms().length, 0);
+    assert.equal(acquit.getTransforms().length, 1);
+
+    assert.equal(parser.parse('describe("test", function() {});').length,
+      1);
+  
+```
+

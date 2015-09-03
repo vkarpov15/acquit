@@ -1,6 +1,6 @@
 {
   "name": "acquit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Parse BDD-style tests (Mocha, Jasmine) to generate documentation",
   "main": "index.js",
   "scripts": {
