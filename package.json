@@ -4,8 +4,8 @@
   "description": "Parse BDD-style tests (Mocha, Jasmine) to generate documentation",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/test.js",
-    "test-coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+    "test": "mocha test/*",
+    "test-coverage": "istanbul cover _mocha -- -R spec ./test/*"
   },
   "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
