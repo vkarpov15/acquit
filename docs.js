@@ -1,9 +1,10 @@
 var acquit = require('./lib');
+var fs = require('fs');
 
-var md = '# acquit\n\nParse BDD-style tests (Mocha, Jasmine) to generate documentation\n\n';
-md += '[![Build Status](https://travis-ci.org/vkarpov15/acquit.svg?branch=master)](https://travis-ci.org/vkarpov15/acquit)\n\n';
+var md = fs.readFileSync('./HEADER.md');
+md += '\n';
 
-var blocks = acquit.parse(require('fs').readFileSync('./test/test.js').toString());
+var blocks = acquit.parse(fs.readFileSync('./test/test.js').toString());
 
 for (var i = 0; i < blocks.length; ++i) {
   var block = blocks[i];
