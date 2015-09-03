@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test/*",
-    "test-coverage": "istanbul cover _mocha -- -R spec ./test/*"
+    "test-coverage": "istanbul cover _mocha -- -R spec ./test/*",
+    "watch": "gulp watch"
   },
   "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
@@ -21,10 +22,14 @@
   },
   "jscsConfig": {
     "preset": "airbnb",
+    "requirePaddingNewLinesAfterBlocks": null,
     "requireMultipleVarDecl": null,
-    "disallowMultipleVarDecl": true
+    "requireTrailingComma": null
   },
   "devDependencies": {
+    "gulp": "3.8.11",
+    "gulp-jscs": "2.0.0",
+    "gulp-mocha": "2.0.0",
     "istanbul": "0.3.5",
     "jscs": "1.9.0",
     "mocha": "2.0.1"
