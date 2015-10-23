@@ -1,3 +1,7 @@
+0.4.0 / 2015-10-23
+==================
+ * added; `.output()` function for chainable output processors
+
 0.3.0 / 2015-09-03
 ==================
  * added; constructor to isolate transforms #7
