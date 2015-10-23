@@ -10,6 +10,7 @@
   },
   "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
+  "keywords": ["documentation", "docs", "bdd", "tests", "mocha"]
   "repository": {
     "type": "git",
     "url": "git://github.com/vkarpov15/acquit.git"
