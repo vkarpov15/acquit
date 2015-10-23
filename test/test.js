@@ -148,6 +148,44 @@ describe('`acquit.trimEachLine()`', function() {
   });
 });
 
+describe('Output processors', function() {
+  afterEach(function() {
+    acquit.removeAllTransforms();
+    acquit.removeAllOutputProcessors();
+  });
+
+  /**
+   * You can use the `.output()` function to attach output processors,
+   * which transform the output from `acquit.parse()` before you get it.
+   */
+  it('can transform acquit output', function() {
+    var contents = [
+      'describe("My feature", function() {',
+      '  it("works", function() {',
+      '    // some code',
+      '  });',
+      '});'
+    ].join('\n');
+
+    acquit.output(function(res) {
+      return [
+        '# ' + res[0].contents,
+        '\n',
+        '## ' + res[0].blocks[0].contents
+      ].join('\n');
+    });
+
+    var res = acquit.parse(contents);
+
+    assert.equal(res, [
+      '# My feature',
+      '\n',
+      '## works'
+    ].join('\n'));
+    acquit.removeAllTransforms();
+  });
+});
+
 describe('`acquit()` constructor', function() {
   /**
    * You can also use acquit as a constructor, in case you need
@@ -166,6 +204,18 @@ describe('`acquit()` constructor', function() {
     parser.removeAllTransforms();
     assert.equal(parser.getTransforms().length, 0);
     assert.equal(acquit.getTransforms().length, 1);
+
+    assert.equal(parser.parse('describe("test", function() {});').length,
+      1);
+
+    parser.output(function(res) {
+      return 'myFakeOutput';
+    });
+
+    assert.equal(parser.parse('describe("test", function() {});'),
+      'myFakeOutput');
+
+    parser.removeAllOutputProcessors();
 
     assert.equal(parser.parse('describe("test", function() {});').length,
       1);
