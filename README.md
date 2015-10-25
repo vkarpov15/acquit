@@ -172,6 +172,42 @@ leading and trailing whitespace.
   
 ```
 
+## Output processors
+
+#### It can transform acquit output
+
+You can use the `.output()` function to attach output processors,
+which transform the output from `acquit.parse()` before you get it.
+
+```javascript
+    
+    var contents = [
+      'describe("My feature", function() {',
+      '  it("works", function() {',
+      '    // some code',
+      '  });',
+      '});'
+    ].join('\n');
+
+    acquit.output(function(res) {
+      return [
+        '# ' + res[0].contents,
+        '\n',
+        '## ' + res[0].blocks[0].contents
+      ].join('\n');
+    });
+
+    var res = acquit.parse(contents);
+
+    assert.equal(res, [
+      '# My feature',
+      '\n',
+      '## works'
+    ].join('\n'));
+    acquit.removeAllTransforms();
+  
+```
+
 ## `acquit()` constructor
 
 #### It creates a new instance with its own set of transforms
@@ -193,6 +229,18 @@ multiple sets of transforms.
     parser.removeAllTransforms();
     assert.equal(parser.getTransforms().length, 0);
     assert.equal(acquit.getTransforms().length, 1);
+
+    assert.equal(parser.parse('describe("test", function() {});').length,
+      1);
+
+    parser.output(function(res) {
+      return 'myFakeOutput';
+    });
+
+    assert.equal(parser.parse('describe("test", function() {});'),
+      'myFakeOutput');
+
+    parser.removeAllOutputProcessors();
 
     assert.equal(parser.parse('describe("test", function() {});').length,
       1);
