@@ -1,3 +1,7 @@
+0.4.1 / 2015-12-07
+==================
+ * chore: update marked for security patch [ChristianMurphy](ChristianMurphy)
+
 0.4.0 / 2015-10-23
 ==================
  * added; `.output()` function for chainable output processors
