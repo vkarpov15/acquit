@@ -1,3 +1,7 @@
+0.5.0 / 2017-07-17
+==================
+ * chore: upgrade to latest esprima and lodash
+
 0.4.1 / 2015-12-07
 ==================
  * chore: update marked for security patch [ChristianMurphy](ChristianMurphy)
