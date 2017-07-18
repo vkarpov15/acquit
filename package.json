@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "commander": "2.5.0",
-    "esprima": "https://github.com/ariya/esprima/archive/85fc2f4b6ad109a86d80d9821f52b5b38d0105c0.tar.gz",
-    "marked": "0.3.5",
-    "underscore": "1.5.2"
+    "esprima": "4.0.0",
+    "lodash": "4.17.4",
+    "marked": "0.3.5"
   },
   "jscsConfig": {
     "preset": "airbnb",
