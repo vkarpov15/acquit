@@ -1,3 +1,7 @@
+0.6.0 / 2018-01-15
+==================
+ * fix: only take last comment from each block to avoid esprima pulling incorrect comments
+
 0.5.0 / 2017-07-17
 ==================
  * chore: upgrade to latest esprima and lodash
