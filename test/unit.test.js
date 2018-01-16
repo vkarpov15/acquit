@@ -7,4 +7,22 @@ describe('acquit:unit', function() {
       acquit.parse('abc', 'not a function');
     });
   });
+
+  it('handles trailing comments', function() {
+    var ret = acquit.parse(`
+      it('test 1', function() {
+        assert.equal('A', 'A');
+        // Trail comment
+      });
+
+      /* Header comment */
+      it('test 2', function() {
+        assert.equal('A', 'A');
+      });
+    `);
+
+    assert.equal(ret.length, 2);
+    assert.equal(ret[1].comments.length, 1);
+    assert.equal(ret[1].comments[0].trim(), 'Header comment');
+  });
 });
