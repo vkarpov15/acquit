@@ -122,6 +122,30 @@ describe('`acquit.parse()`', function() {
     assert.equal(1, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code);
   });
+
+  /**
+   * Acquit can parse Mocha alias:
+   *  - `context` = `describe`
+   *  - `satisfy` = `it`
+   */
+  it('can parse Mocha\'s `context()` and `satisfy()`', function() {
+    var contents =
+    'context(\'Mocha aliases\', function() {\n' +
+    '  satisfy(\'should be parsed\', function() {\n' +
+    '    assert.equal(1, 1);\n' +
+    '  });\n' +
+    '});';
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(1, ret.length);
+    assert.equal('describe', ret[0].type);
+    assert.equal(0, ret[0].comments.length);
+    assert.equal(1, ret[0].blocks.length);
+    assert.equal('it', ret[0].blocks[0].type);
+    assert.equal(0, ret[0].blocks[0].comments.length);
+    assert.ok(ret[0].blocks[0].code);
+  });
 });
 
 describe('`acquit.trimEachLine()`', function() {
