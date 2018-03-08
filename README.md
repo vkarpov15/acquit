@@ -140,6 +140,33 @@ Acquit can also parse ES6 code
   
 ```
 
+#### It can parse Mocha's `context()` and `satisfy()`
+
+Acquit can parse Mocha alias:
+- `context` = `describe`
+- `satisfy` = `it`
+
+```javascript
+    
+    var contents =
+    'context(\'Mocha aliases\', function() {\n' +
+    '  satisfy(\'should be parsed\', function() {\n' +
+    '    assert.equal(1, 1);\n' +
+    '  });\n' +
+    '});';
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(1, ret.length);
+    assert.equal('describe', ret[0].type);
+    assert.equal(0, ret[0].comments.length);
+    assert.equal(1, ret[0].blocks.length);
+    assert.equal('it', ret[0].blocks[0].type);
+    assert.equal(0, ret[0].blocks[0].comments.length);
+    assert.ok(ret[0].blocks[0].code);
+  
+```
+
 ## `acquit.trimEachLine()`
 
 #### It strips out whitespace and asterisks in multiline comments
