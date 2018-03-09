@@ -1,3 +1,7 @@
+0.6.1 / 2018-03-08
+==================
+ * fix: support `context` and `specify` as aliases for `describe` and `it`
+
 0.6.0 / 2018-01-15
 ==================
  * fix: only take last comment from each block to avoid esprima pulling incorrect comments
