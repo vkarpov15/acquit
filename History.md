@@ -1,3 +1,7 @@
+0.6.2 / 2018-03-31
+==================
+ * fix(parse): filter out leading comments that are in previous blocks due to esprima quirks
+
 0.6.1 / 2018-03-08
 ==================
  * fix: support `context` and `specify` as aliases for `describe` and `it`
