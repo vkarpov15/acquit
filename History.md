@@ -1,3 +1,7 @@
+0.6.3 / 2018-05-04
+==================
+ * fix(parse): format `it()` block `code` to remove extra indents
+
 0.6.2 / 2018-03-31
 ==================
  * fix(parse): filter out leading comments that are in previous blocks due to esprima quirks
