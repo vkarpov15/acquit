@@ -1,0 +1,73 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Open Sans', serif;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+a {
+  text-decoration: none;
+  color: #E2BD76;
+}
+
+code {
+  font-family: 'Open Sans Mono', monospace;
+}
+
+button {
+  background: #493D26;
+  padding: 9px 0px;
+  border-radius: 3px;
+  width: 180px;
+  border: 0px;
+}
+
+button a {
+  color: white;
+}
+
+.hero {
+  font-size: 24pt;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .left {
+  float: left;
+  margin-right: 25px;
+}
+
+.hero .right {
+  float: left;
+}
+
+.hero .right::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.hero .title code {
+  color: #E2BD76;
+  font-size: 0.25em;
+}
+
+.hero img.logo {
+  height: 8.5em;
+}
+
+.hero .cta {
+  margin-top: 0.5em;
+}
+
+.hero .cta button {
+  margin-right: 1em;
+}
+
+.hero .social {
+  margin-top: 0.5em;
+}

@@ -1,24 +1,24 @@
-var acquit = require('./lib');
-var fs = require('fs');
+'use strict';
 
-var md = fs.readFileSync('./HEADER.md');
+const acquit = require('./lib');
+const fs = require('fs');
+
+/*require('acquit-markdown')(acquit);
+
+let md = fs.readFileSync('./HEADER.md');
 md += '\n';
 
-var blocks = acquit.parse(fs.readFileSync('./test/test.js').toString());
+md += acquit.parse(fs.readFileSync('./test/test.js').toString());
 
-for (var i = 0; i < blocks.length; ++i) {
-  var block = blocks[i];
-  md += '## ' + block.contents.trim() + '\n\n';
-  for (var j = 0; j < block.blocks.length; ++j) {
-    var it = block.blocks[j];
-    md += '#### It ' + it.contents.trim() + '\n\n';
-    if (it.comments.length) {
-      md += acquit.trimEachLine(it.comments[0]).trim() + '\n\n';
-    }
-    md += '```javascript\n';
-    md += '    ' + it.code + '\n';
-    md += '```\n\n';
-  }
+require('fs').writeFileSync('./README.md', md);*/
+
+const layout = require('./docs/layout');
+
+const props = { version: require('./package').version };
+const pages = [
+  { file: 'index.html', content: require('./docs/home')(props) }
+];
+
+for (const page of pages) {
+  fs.writeFileSync(page.file, layout(Object.assign({}, props, page)));
 }
-
-require('fs').writeFileSync('./README.md', md);
