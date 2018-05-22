@@ -22,23 +22,12 @@
     "url": "git://github.com/vkarpov15/acquit.git"
   },
   "dependencies": {
-    "commander": "2.5.0",
     "esprima": "4.0.0",
     "lodash": "4.17.4",
     "marked": "0.3.9"
   },
-  "jscsConfig": {
-    "preset": "airbnb",
-    "requirePaddingNewLinesAfterBlocks": null,
-    "requireMultipleVarDecl": null,
-    "requireTrailingComma": null
-  },
   "devDependencies": {
-    "gulp": "3.8.11",
-    "gulp-jscs": "2.0.0",
-    "gulp-mocha": "2.0.0",
     "istanbul": "0.4.2",
-    "jscs": "1.9.0",
     "mocha": "3.5.0"
   }
 }
