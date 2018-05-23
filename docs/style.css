@@ -1,9 +1,11 @@
 body {
   font-family: 'Open Sans', sans-serif;
+  margin: 0px;
+  padding: 0px;
 }
 
 h1 {
-  font-family: 'Open Sans', serif;
+  font-family: 'Open Sans', sans-serif;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
 }
@@ -14,7 +16,7 @@ a {
 }
 
 code {
-  font-family: 'Open Sans Mono', monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
 button {
@@ -29,6 +31,49 @@ button a {
   color: white;
 }
 
+.content {
+  margin-top: 35px;
+}
+
+/* Header */
+
+header {
+  width: 100%;
+  background-color: #eee;
+  height: 55px;
+  border-bottom: 1px solid #ddd;
+}
+
+.header {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header .brand {
+  float: left;
+  font-size: 25px;
+  padding-top: 10px;
+}
+
+.header .links {
+  float: right;
+  font-size: 19px;
+  padding-top: 13px;
+}
+
+.header .links .selected {
+  font-weight: bold;
+}
+
+.header .links::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Home Page */
+
 .hero {
   font-size: 24pt;
   width: 1000px;
@@ -38,11 +83,16 @@ button a {
 
 .hero .left {
   float: left;
-  margin-right: 25px;
+  width: 320px;
 }
 
 .hero .right {
   float: left;
+  width: 680px;
+}
+
+.hero .right .tagline {
+  line-height: 1.5em;
 }
 
 .hero .right::after {
@@ -57,7 +107,8 @@ button a {
 }
 
 .hero img.logo {
-  height: 8.5em;
+  height: 300px;
+  margin-left: -20px;
 }
 
 .hero .cta {
