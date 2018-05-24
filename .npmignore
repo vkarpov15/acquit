@@ -3,3 +3,12 @@ gulpfile.js
 logo.svg
 
 package-lock.json
+
+docs/*
+favicon.ico
+
+History.md
+.travis.yml
+.gitignore
+HEADER.md
+index.html
