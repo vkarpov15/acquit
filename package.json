@@ -6,7 +6,7 @@
   "scripts": {
     "static": "serve .",
     "test": "mocha test/*",
-    "test-coverage": "istanbul cover _mocha -- -R spec ./test/*"
+    "test-coverage": "nyc mocha -- -R spec ./test/*"
   },
   "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
@@ -23,13 +23,13 @@
   },
   "dependencies": {
     "esprima": "4.0.0",
-    "lodash": "4.17.4",
+    "lodash": "4.17.5",
     "marked": "0.3.9"
   },
   "devDependencies": {
     "acquit-markdown": "0.1.0",
-    "istanbul": "0.4.2",
-    "mocha": "3.5.0",
+    "mocha": "5.2.0",
+    "nyc": "11.8.0",
     "serve": "6.5.7"
   }
 }
