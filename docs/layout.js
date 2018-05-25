@@ -9,6 +9,11 @@ module.exports = props => `
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link href="/docs/style.css" rel="stylesheet">
 
+    <meta name="twitter:card" content="Acquit lets you generate documentation from BDD tests written for test runners like Mocha and Jasmine."></meta>
+    <meta property="og:title" content="Acquit ${props.version}: ${props.subtitle}"></meta>
+    <meta property="og:description" content="Acquit lets you generate documentation from BDD tests written for test runners like Mocha and Jasmine."></meta>
+    <meta property="og:image" content="http://acquit.mongoosejs.io/logo.svg"></meta>
+
     <script type="text/javascript" src="/docs/native.js"></script>
   </head>
 
