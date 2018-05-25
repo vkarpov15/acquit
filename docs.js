@@ -16,7 +16,10 @@ const layout = require('./docs/layout');
 
 const props = { version: require('./package').version };
 const pages = [
-  { path: 'index.html', content: require('./docs/home')(props) }
+  { path: 'index.html', content: require('./docs/home')(props) },
+  { path: 'docs/examples.html', content: require('./docs/examples')(props) },
+  /*{ path: 'docs.html', content: require('./docs/docs')(props) },
+  { path: 'plugins.html', content: require('./docs/plugins')(props) }*/
 ];
 
 for (const page of pages) {

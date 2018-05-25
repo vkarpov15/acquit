@@ -62,6 +62,11 @@ header {
   padding-top: 13px;
 }
 
+.header .links a {
+  margin-left: 15px;
+  color: #958C7B;
+}
+
 .header .links .selected {
   font-weight: bold;
 }
@@ -136,8 +141,18 @@ header {
 
 .boxes div {
   width: 290px;
-  margin-right: 30px;
+  margin-left: 25px;
+  margin-right: 10px;
   float: left;
+}
+
+/* Examples Page */
+
+.container {
+  font-size: 24pt;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* CPC ads */

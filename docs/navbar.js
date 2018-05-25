@@ -6,6 +6,7 @@ module.exports = props => `
     </div>
     <div class="links">
       <a href="/index.html" class="${getClassName(props, 'index.html')}">Home</a>
+      <a href="/docs/examples.html" class="${getClassName(props, 'docs/examples.html')}">Examples</a>
     </div>
   </div>
 </header>

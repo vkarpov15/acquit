@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "acquit-markdown": "0.1.0",
+    "acquit-require": "0.0.2",
     "mocha": "5.2.0",
     "nyc": "11.8.0",
     "serve": "6.5.7"
