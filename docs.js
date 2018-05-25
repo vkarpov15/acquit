@@ -8,10 +8,21 @@ const layout = require('./docs/layout');
 
 const props = { version: require('./package').version };
 const pages = [
-  { path: 'index.html', content: require('./docs/home')(props) },
-  { path: 'docs/examples.html', content: require('./docs/examples')(props) },
-  /*{ path: 'docs.html', content: require('./docs/docs')(props) },
-  { path: 'plugins.html', content: require('./docs/plugins')(props) }*/
+  {
+    path: 'index.html',
+    content: require('./docs/home')(props),
+    subtitle: 'Parse BDD tests to generate documentation'
+  },
+  {
+    path: 'docs/examples.html',
+    content: require('./docs/examples')(props),
+    subtitle: 'Examples'
+  },
+  {
+    path: 'docs/plugins.html',
+    content: require('./docs/plugins')(props),
+    subtitle: 'Plugins'
+  }
 ];
 
 for (const page of pages) {

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Acquit v0.6.3: Examples</title>
+    <title>Acquit v0.6.3: Plugins</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
@@ -18,8 +18,8 @@
     </div>
     <div class="links">
       <a href="/index.html" class="">Home</a>
-      <a href="/docs/examples.html" class="selected">Examples</a>
-      <a href="/docs/plugins.html" class="">Plugins</a>
+      <a href="/docs/examples.html" class="">Examples</a>
+      <a href="/docs/plugins.html" class="selected">Plugins</a>
     </div>
   </div>
 </header>
@@ -27,24 +27,54 @@
     <div class="content">
       <div class="container">
     <link rel="stylesheet" href="/docs/github.css">
-    <h2 id="importing-examples-from-tests">Importing Examples From Tests</h2>
-<p>The <a href="https://www.npmjs.com/package/acquit-require">acquit-require plugin</a>
-handles dereferencing examples from your HTML or markdown. Drop in
-<code>[require:regexp$]</code> and the plugin will replace that with the
-first test case it can find that ends with &#39;regexp&#39;.</p>
-<p>Given the below <code>sample.md</code>:</p>
-<pre><code>Printing "Hello, World" in JavaScript is easy:
+    <h2 id="runnable-plugins">Runnable Plugins</h2>
+<h4 id="-acquit-require-https-www-npmjs-com-package-acquit-require-"><a href="https://www.npmjs.com/package/acquit-require"><code>acquit-require</code></a></h4>
+<p>Dereference <code>[require:&lt;regexp&gt;]</code> statements in your markdown or HTML
+and replace them with the source code of the first test that matches
+<code>&lt;regexp&gt;</code>.</p>
+<p>Given <code>sample.md</code>:</p>
+<pre><code># JS for Beginners
+
+Printing &quot;Hello, World&quot; in JavaScript is easy:
 
 ```
 [require:bar]
 ```
 
-This is how you print "Bye!" instead:
+This is how you print &quot;Bye!&quot; instead:
 
 ```
 [require:baz]
 ```
-</code></pre><p>And the below <code>example.js</code> test file:</p>
+</code></pre><p>And <code>example.js</code>:</p>
+<pre><code class="lang-javascript">describe(<span class="hljs-string">'foo'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  it(<span class="hljs-string">'bar'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello, World!'</span>);
+  });
+
+  it(<span class="hljs-string">'baz'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Bye!'</span>);
+  });
+});
+</code></pre>
+<p><code>acquit-require</code> replaces <code>[require:bar]</code> and <code>[require:baz]</code> with
+the source code of the &#39;bar&#39; and &#39;baz&#39; tests from <code>example.js</code>.</p>
+<pre><code># JS for Beginners
+
+Printing &quot;Hello, World&quot; in JavaScript is easy:
+
+```
+console.log(&#39;Hello, World!&#39;);
+```
+
+This is how you print &quot;Bye!&quot; instead:
+
+```
+console.log(&#39;Hello, World!&#39;);
+```
+</code></pre><h4 id="-acquit-markdown-https-www-npmjs-com-package-acquit-markdown-"><a href="https://www.npmjs.com/package/acquit-markdown"><code>acquit-markdown</code></a></h4>
+<p>The <code>acquit-markdown</code> compiles test files into markdown, including
+comments. Say you have a test file <code>example.js</code> as shown below.</p>
 <pre><code class="lang-javascript">describe(<span class="hljs-string">'foo'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">/* This is how you print "Hello, World!" in JavaScript */</span>
   it(<span class="hljs-string">'bar'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -57,55 +87,7 @@ This is how you print "Bye!" instead:
   });
 });
 </code></pre>
-<p>The below code will replace <code>[require:bar]</code> and <code>[require:baz]</code> with the
-code of the corresponding tests from <code>example.js</code>.</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
-<span class="hljs-keyword">const</span> transform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'acquit-require'</span>);
-
-<span class="hljs-keyword">const</span> markdown = fs.readFileSync(<span class="hljs-string">'./test/sample.md'</span>).toString();
-<span class="hljs-keyword">const</span> examples = fs.readFileSync(<span class="hljs-string">'./test/example.js'</span>).toString();
-
-<span class="hljs-keyword">const</span> output = transform(markdown, acquit.parse(examples));
-
-<span class="hljs-comment">// `[require:foo]` and `[require:bar]` are replaced with the</span>
-<span class="hljs-comment">// corresponding tests in `example.js`</span>
-<span class="hljs-built_in">console</span>.log(output);
-</code></pre>
-<p>Below is the transformed markdown.</p>
-<pre><code>Printing "Hello, World" in JavaScript is easy:
-
-```
-console.log('Hello, World!');
-```
-
-This is how you print "Bye!" instead:
-
-```
-console.log('Bye!');
-```
-</code></pre><h2 id="transpiling-tests-into-markdown">Transpiling Tests into Markdown</h2>
-<p>The <a href="https://www.npmjs.com/package/acquit-markdown">acquit-markdown plugin</a> lets you
-compile your existing tests into markdown. If you already have
-well-commented tests, this plugin will convert those into a GitHub
-<code>README.md</code> for you. The acquit-markdown plugin <a href="https://github.com/vkarpov15/acquit-markdown/blob/master/docs.js">uses itself to generate its own <code>README</code></a>.</p>
-<p>You can <a href="https://www.npmjs.com/package/acquit-markdown#it-converts-acquit-output-to-a-simple-markdown-format">use acquit-markdown from Node.js</a>, or as an executable from the command line. To install:</p>
-<pre><code>npm install acquit acquit-markdown
-</code></pre><p>Say you have a test file <code>example.js</code> as shown below.</p>
-<pre><code>describe(<span class="hljs-string">'foo'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-comment">/* This is how you print "Hello, World!" in JavaScript */</span>
-  it(<span class="hljs-string">'bar'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello, World!'</span>);
-  });
-
-  <span class="hljs-comment">// You can print any string</span>
-  it(<span class="hljs-string">'baz'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Bye!'</span>);
-  });
-});
-</code></pre><p>You can run the <code>acquit-markdown</code> executable to compile this test
-file into markdown.</p>
-<pre><code>./node_modules/.bin/acquit-markdown -p ./test/example.js &gt; README.md
-</code></pre><p><code>README.md</code> will now contain the below markdown.</p>
+<p><code>acquit-markdown</code> compiles this file into the below markdown:</p>
 <pre><code># foo
 
 ## It bar
@@ -123,6 +105,27 @@ You can print any string
 ```javascript
 console.log(&#39;Bye!&#39;);
 ```
+</code></pre><h2 id="utility-plugins">Utility Plugins</h2>
+<h4 id="-acquit-ignore-https-www-npmjs-com-package-acquit-ignore-"><a href="https://www.npmjs.com/package/acquit-ignore"><code>acquit-ignore</code></a></h4>
+<p>Remove asserts, <code>done()</code>, and other unnecessary boilerplate from your examples.</p>
+<pre><code class="lang-javascript">describe(<span class="hljs-string">'foo'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// `acquit-ignore` will strip out all code between</span>
+  <span class="hljs-comment">// `// acquit:ignore:start` and `// acquit:ignore:end`</span>
+  it(<span class="hljs-string">'bar'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Hello, World!'</span>);
+    <span class="hljs-comment">// acquit:ignore:start</span>
+    done();
+    <span class="hljs-comment">// acquit:ignore:end</span>
+  });
+});
+</code></pre>
+<p>You can use <code>acquit-ignore</code> programmatically:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> acquit = <span class="hljs-built_in">require</span>(<span class="hljs-string">'acquit'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'acquit-ignore'</span>)();
+</code></pre>
+<p>You can also use it with the <code>acquit-markdown</code> executable using the
+<code>-r</code> flag.</p>
+<pre><code>./node_modules/.bin/acquit-markdown -r acquit-ignore -p ./test/example.js &gt; README.md
 </code></pre>
   </div>
     </div>

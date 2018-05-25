@@ -38,7 +38,7 @@ module.exports = props => `
     is a lightweight parser that parses BDD test syntax and comments into a
     usable format for plugins.
   </div>
-  <div id="transpile">
+  <div id="compile">
     <h3>Generate Markdown BDD Tests</h3>
     The <a href="https://www.npmjs.com/package/acquit-markdown">acquit-markdown plugin</a>
     converts BDD test files into <a href="https://en.wikipedia.org/wiki/Markdown">markdown</a>.

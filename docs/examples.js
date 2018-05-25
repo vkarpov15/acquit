@@ -6,11 +6,8 @@ const transform = require('acquit-require');
 
 require('acquit-ignore')(acquit);
 
-marked.setOptions({
-  highlight: function(code) {
-    return highlight.highlight('JavaScript', code).value;
-  }
-});
+const highlightJS = code => highlight.highlight('JavaScript', code).value;
+marked.setOptions({ highlight: highlightJS });
 
 const examples = fs.
   readFileSync(`${__dirname}/../test/examples.test.js`).
@@ -24,9 +21,9 @@ const exampleTest = fs.readFileSync('./test/example.js').toString().trim();
 
 module.exports = props => {
   const content = marked(md).
-    replace('[markdown]', exampleMarkdown).
-    replace('[example]', exampleTest).
-    replace('[compiledMarkdown]', transform(exampleMarkdown, acquit.parse(exampleTest)));
+    replace(/{markdown}/g, exampleMarkdown).
+    replace(/{example}/g, highlightJS(exampleTest)).
+    replace(/{compiledMarkdown}/g, transform(exampleMarkdown, acquit.parse(exampleTest)));
   return `
   <div class="container">
     <link rel="stylesheet" href="/docs/github.css">
