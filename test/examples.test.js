@@ -1,3 +1,5 @@
+'use strict';
+
 const acquit = require('../');
 const assert = require('assert');
 
