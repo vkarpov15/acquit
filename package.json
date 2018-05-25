@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "static": "serve .",
-    "test": "mocha test/*",
-    "test-coverage": "nyc mocha -- -R spec ./test/*"
+    "test": "mocha test/*.test.js",
+    "test-coverage": "nyc mocha -- -R spec ./test/*.test.js"
   },
   "author": "Valeri Karpov <val@karpov.io>",
   "license": "Apache 2.0",
@@ -27,8 +27,11 @@
     "marked": "0.3.9"
   },
   "devDependencies": {
+    "acquit-ignore": "0.0.5",
     "acquit-markdown": "0.1.0",
-    "acquit-require": "0.0.2",
+    "acquit-require": "0.0.4",
+    "highlight.js": "9.12.0",
+    "marked": "0.4.0",
     "mocha": "5.2.0",
     "nyc": "11.8.0",
     "serve": "6.5.7"

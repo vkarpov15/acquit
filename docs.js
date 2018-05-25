@@ -3,15 +3,7 @@
 const acquit = require('./lib');
 const fs = require('fs');
 
-require('acquit-markdown')(acquit);
-
-let md = fs.readFileSync('./HEADER.md');
-md += '\n';
-
-md += acquit.parse(fs.readFileSync('./test/test.js').toString());
-
-require('fs').writeFileSync('./README.md', md);
-
+// Website
 const layout = require('./docs/layout');
 
 const props = { version: require('./package').version };
@@ -25,3 +17,13 @@ const pages = [
 for (const page of pages) {
   fs.writeFileSync(page.path, layout(Object.assign({}, props, page)));
 }
+
+// README
+require('acquit-markdown')(acquit);
+
+let md = fs.readFileSync('./HEADER.md');
+md += '\n';
+
+md += acquit.parse(fs.readFileSync('./test/main.test.js').toString());
+
+fs.writeFileSync('./README.md', md);

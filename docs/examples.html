@@ -18,17 +18,76 @@
     </div>
     <div class="links">
       <a href="/index.html" class="">Home</a>
-      <a href="/examples.html" class="">Examples</a>
+      <a href="/docs/examples.html" class="selected">Examples</a>
+      <a href="/docs/plugins.html" class="">Examples</a>
     </div>
   </div>
 </header>
 
     <div class="content">
       <div class="container">
-  <div id="require-examples">
-    <h2>Importing Examples From Tests</h2>
+    <link rel="stylesheet" href="/docs/github.css">
+    <h2 id="importing-examples-from-tests">Importing Examples From Tests</h2>
+<p>The <a href="https://www.npmjs.com/package/acquit-require">acquit-require plugin</a>
+handles dereferencing examples from your HTML or markdown. Drop in
+<code>[require:regexp$]</code> and the plugin will replace that with the
+first test case it can find that ends with &#39;regexp&#39;.</p>
+<p>Given the below <code>sample.md</code>:</p>
+<pre><code>Printing "Hello, World" in JavaScript is easy:
+
+```
+[require:bar]
+```
+
+This is how you print "Bye!" instead:
+
+```
+[require:baz]
+```
+</code></pre><p>And the below <code>example.js</code> test file:</p>
+<pre><code class="lang-javascript">describe('foo', function() {
+  it('bar', function() {
+    console.log('Hello, World!');
+  });
+
+  it('baz', function() {
+    console.log('Bye!');
+  });
+});
+</code></pre>
+<p>The below code will replace <code>[require:bar]</code> and <code>[require:baz]</code> with the
+code of the corresponding tests from <code>example.js</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);
+<span class="hljs-keyword">const</span> transform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'acquit-require'</span>);
+
+<span class="hljs-keyword">const</span> markdown = fs.readFileSync(<span class="hljs-string">'./test/sample.md'</span>).toString();
+<span class="hljs-keyword">const</span> examples = fs.readFileSync(<span class="hljs-string">'./test/example.js'</span>).toString();
+
+<span class="hljs-keyword">const</span> output = transform(markdown, acquit.parse(examples));
+
+<span class="hljs-comment">// `[require:foo]` and `[require:bar]` are replaced with the</span>
+<span class="hljs-comment">// corresponding tests in `example.js`</span>
+<span class="hljs-built_in">console</span>.log(output);
+</code></pre>
+<p>Below is the transformed markdown.</p>
+<pre><code>Printing "Hello, World" in JavaScript is easy:
+
+```
+console.log('Hello, World!');
+```
+
+This is how you print "Bye!" instead:
+
+```
+console.log('Bye!');
+```
+</code></pre><h2 id="transpiling-tests-into-markdown">Transpiling Tests into Markdown</h2>
+<p>The <a href="https://www.npmjs.com/package/acquit-markdown">acquit-markdown plugin</a> lets you
+compile your existing tests into markdown. If you already have
+well-commented tests, this plugin will convert those into a GitHub
+<code>README.md</code> for you. The acquit-markdown plugin <a href="https://github.com/vkarpov15/acquit-markdown/blob/master/docs.js">uses itself to generate its own <code>README</code></a>.</p>
+
   </div>
-</div>
     </div>
     <script type="text/javascript">
       _native.init("CK7DT53Y", {
