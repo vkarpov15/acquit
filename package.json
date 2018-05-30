@@ -2,6 +2,7 @@
   "name": "acquit",
   "version": "0.6.3",
   "description": "Parse BDD tests (Mocha, Jasmine) to generate documentation",
+  "homepage": "http://acquit.mongoosejs.io",
   "main": "index.js",
   "scripts": {
     "static": "serve .",
