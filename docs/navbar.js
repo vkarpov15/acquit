@@ -2,7 +2,7 @@ module.exports = props => `
 <header>
   <div class="header">
     <div class="brand">
-      <b>acquit</b>
+      <b><a href="/index.html">acquit</a></b>
     </div>
     <div class="links">
       <a href="/index.html" class="${getClassName(props, 'index.html')}">Home</a>
