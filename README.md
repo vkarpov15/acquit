@@ -20,22 +20,23 @@ call contains a list of "blocks", whereas an `it` call contains the actual
 `code` in order to provide an effective, well-tested example.
 
 ```javascript
-var contents =
-  '/**\n' +
-  ' * A `Model` is a convenience wrapper around objects stored in a\n' +
-  ' * collection\n' +
-  ' */\n' +
-  'describe(\'Model\', function() {\n' +
-  '  /**\n' +
-  '   * Model **should** be able to save stuff\n' +
-  '   **/\n' +
-  '  it(\'can save\', function() {\n' +
-  '    assert.ok(1);\n' +
-  '  });\n' +
-  '\n' +
-  '  it(\'can save with a parameter\', function() {\n' +
-  '  });\n' +
-  '});';
+var contents = `
+/**
+ * A \`Model\` is a convenience wrapper around objects stored in a
+ * collection
+ */
+describe('Model', function() {
+  /**
+   * Model **should** be able to save stuff
+   **/
+  it('can save', function() {
+    assert.ok(1);
+  });
+
+  it('can save with a parameter', function() {
+  });
+});
+`
 
 var ret = acquit.parse(contents);
 
