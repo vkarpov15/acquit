@@ -36,7 +36,7 @@ describe('Model', function() {
   it('can save with a parameter', function() {
   });
 });
-`
+`;
 
 var ret = acquit.parse(contents);
 
