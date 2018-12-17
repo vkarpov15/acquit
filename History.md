@@ -1,3 +1,7 @@
+1.0.2 / 2018-12-16
+==================
+ * chore: upgrade serve re: security vulnerability
+
 0.6.3 / 2018-05-04
 ==================
  * fix(parse): format `it()` block `code` to remove extra indents
