@@ -28,9 +28,9 @@
     "marked": "0.3.9"
   },
   "devDependencies": {
-    "acquit-ignore": "0.0.5",
+    "acquit-ignore": "0.1.0",
     "acquit-markdown": "0.1.0",
-    "acquit-require": "0.0.4",
+    "acquit-require": "0.1.1",
     "highlight.js": "9.12.0",
     "marked": "0.4.0",
     "mocha": "5.2.0",
