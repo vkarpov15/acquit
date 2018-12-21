@@ -21,21 +21,21 @@ call contains a list of "blocks", whereas an `it` call contains the actual
 
 ```javascript
 var contents = `
-/**
- * A \`Model\` is a convenience wrapper around objects stored in a
- * collection
- */
-describe('Model', function() {
   /**
-   * Model **should** be able to save stuff
-   **/
-  it('can save', function() {
-    assert.ok(1);
-  });
+   * A Model is a convenience wrapper around objects stored in a
+   * collection
+   */
+  describe('Model', function() {
+    /**
+     * Model **should** be able to save
+     **/
+     it('can save', function() {
+       assert.ok(1);
+     });
 
-  it('can save with a parameter', function() {
+     it('can save with a parameter', function() {
+     });
   });
-});
 `;
 
 var ret = acquit.parse(contents);
@@ -44,7 +44,7 @@ var ret = acquit.parse(contents);
 assert.equal(1, ret.length);
 assert.equal('describe', ret[0].type);
 assert.equal(1, ret[0].comments.length);
-assert.ok(ret[0].comments[0].indexOf('`Model`') != -1);
+assert.ok(ret[0].comments[0].indexOf('Model') != -1);
 
 // Top-level block contains the `it('can save')` block, which contains
 // the code
@@ -67,13 +67,14 @@ executed on every block and can transform the block however you want.
 
 
 ```javascript
-var contents =
-  'describe(\'ES6\', function() {\n' +
-  '  // ES6 has a `yield` keyword\n' +
-  '  it(\'should be able to yield\', function() {\n' +
-  '    // some code\n' +
-  '  });\n' +
-  '});';
+var contents = `
+  describe('ES6', function() {
+    // ES6 has a yield keyword
+    it(\'should be able to yield\', function() {
+     // some code
+   });
+  });
+`;
 
 var cb = function(block) {
   block.code = 'return value from callback';
@@ -96,13 +97,14 @@ function passed to `.parse()`.
 
 
 ```javascript
-var contents =
-  'describe(\'ES6\', function() {\n' +
-  '  // ES6 has a `yield` keyword\n' +
-  '  it(\'should be able to yield\', function() {\n' +
-  '    // some code\n' +
-  '  });\n' +
-  '});';
+var contents = `
+  describe('ES6', function() {
+    // ES6 has a yield keyword
+    it('should be able to yield', function() {
+      // some code
+    });
+  });
+`;
 
 var cb = function(block) {
   block.code = 'my transformed code';
@@ -123,15 +125,16 @@ Acquit can also parse ES6 code
 
 
 ```javascript
-var contents =
-  'describe(\'ES6\', function() {\n' +
-  '  // ES6 has a `yield` keyword\n' +
-  '  it(\'should be able to yield\', function() {\n' +
-  '    co(function*() {\n' +
-  '      yield 1;\n' +
-  '    })();\n' +
-  '  });\n' +
-  '});';
+var contents = `
+  describe('ES6', function() {
+    // ES6 has a yield keyword
+    it('should be able to yield', function() {
+      co(function*() {
+        yield 1;
+      })();
+    });
+  });
+`;
 
 var ret = acquit.parse(contents);
 
@@ -153,12 +156,13 @@ Acquit can parse Mocha alias:
 
 
 ```javascript
-var contents =
-'context(\'Mocha aliases\', function() {\n' +
-'  specify(\'should be parsed\', function() {\n' +
-'    assert.equal(1, 1);\n' +
-'  });\n' +
-'});';
+var contents = `
+  context('Mocha aliases', function() {
+    specify('should be parsed', function() {
+      assert.equal(1, 1);
+    });
+  });
+`;
 
 var ret = acquit.parse(contents);
 
@@ -180,8 +184,8 @@ assert.ok(ret[0].blocks[0].code);
 from JSdoc-style comments
 
 ```javascript
-var str = '  * This comment looks like a \n' +
-  '  * parsed JSdoc-style comment';
+var str = `  * This comment looks like a
+  * parsed JSdoc-style comment`;
 
 assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
   'parsed JSdoc-style comment');
@@ -194,8 +198,8 @@ You don't have to use JSdoc-style comments: `trimEachLine()` also trims
 leading and trailing whitespace.
 
 ```javascript
-var str = 'This comment looks like a \n' +
-  '  * parsed JSdoc-style comment';
+var str = `This comment looks like a
+    * parsed JSdoc-style comment`;
 
 assert.equal(acquit.trimEachLine(str), 'This comment looks like a\n' +
   'parsed JSdoc-style comment');
@@ -211,29 +215,29 @@ which transform the output from `acquit.parse()` before you get it.
 
 
 ```javascript
-var contents = [
-  'describe("My feature", function() {',
-  '  it("works", function() {',
-  '    // some code',
-  '  });',
-  '});'
-].join('\n');
+var contents = `
+  describe("My feature", function() {
+    it("works", function() {
+      // some code
+    });
+  });
+`;
 
 acquit.output(function(res) {
-  return [
-    '# ' + res[0].contents,
-    '\n',
-    '## ' + res[0].blocks[0].contents
-  ].join('\n');
+  return `
+    # ${res[0].contents}
+
+    ## ${res[0].blocks[0].contents}
+  `;
 });
 
 var res = acquit.parse(contents);
 
-assert.equal(res, [
-  '# My feature',
-  '\n',
-  '## works'
-].join('\n'));
+assert.equal(res.trim(), `
+    # My feature
+
+    ## works
+`.trim());
 acquit.removeAllTransforms();
 ```
 
