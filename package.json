@@ -35,6 +35,8 @@
     "marked": "0.4.0",
     "mocha": "5.2.0",
     "nyc": "11.8.0",
-    "serve": "7.x"
-  }
+    "serve": "7.x",
+    "acquit": "1.x"
+  },
+  "foo": "test123"
 }
