@@ -1,3 +1,7 @@
+1.0.5 / 2019-06-15
+==================
+ * fix: fix crash on node 4.x
+
 1.0.4 / 2019-06-15
 ==================
  * refactor: remove lodash dependency re: security vulnerabilities

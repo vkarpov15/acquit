@@ -1,6 +1,6 @@
 {
   "name": "acquit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Parse BDD tests (Mocha, Jasmine) to generate documentation",
   "homepage": "http://acquit.mongoosejs.io",
   "main": "index.js",
