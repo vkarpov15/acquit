@@ -1,3 +1,7 @@
+1.0.4 / 2019-06-15
+==================
+ * refactor: remove lodash dependency re: security vulnerabilities
+
 1.0.2 / 2018-12-16
 ==================
  * chore: upgrade serve re: security vulnerability
