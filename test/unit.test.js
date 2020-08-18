@@ -25,4 +25,14 @@ describe('acquit:unit', function() {
     assert.equal(ret[1].comments.length, 1);
     assert.equal(ret[1].comments[0].trim(), 'Header comment');
   });
+
+  it('handles import statements', function() {
+    const ret = acquit.parse(`
+      import foo from 'bar';
+
+      it('test 1', function() { assert.equal('A', 'A'); });
+    `);
+
+    assert.equal(ret.length, 1);
+  });
 });
