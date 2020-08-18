@@ -1,3 +1,7 @@
+1.1.0 / 2020-08-18
+==================
+ * feat: support `import` statements by using esprima `parseModule()` #22
+
 1.0.5 / 2019-06-15
 ==================
  * fix: fix crash on node 4.x
