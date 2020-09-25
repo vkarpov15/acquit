@@ -1,3 +1,7 @@
+1.2.1 / 2020-09-25
+==================
+ * fix: downgrade to marked v0.7.x for Node v4 support #25
+
 1.2.0 / 2020-09-25
 ==================
  * fix: upgrade to marked v1.1.x for security fixes #25 [rob4629](https://github.com/rob4629)
