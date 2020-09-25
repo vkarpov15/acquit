@@ -1,3 +1,7 @@
+1.2.0 / 2020-09-25
+==================
+ * fix: upgrade to marked v1.1.x for security fixes #25 [rob4629](https://github.com/rob4629)
+
 1.1.0 / 2020-08-18
 ==================
  * feat: support `import` statements by using esprima `parseModule()` #22
