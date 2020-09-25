@@ -24,16 +24,15 @@
   },
   "dependencies": {
     "esprima": "4.0.0",
-    "marked": "0.3.9"
+    "marked": "^1.1.1"
   },
   "devDependencies": {
     "acquit-ignore": "0.1.0",
     "acquit-markdown": "0.1.0",
     "acquit-require": "0.1.1",
     "highlight.js": "9.12.0",
-    "marked": "0.4.0",
-    "mocha": "5.2.0",
-    "nyc": "11.8.0",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
     "serve": "11.x"
   }
 }
