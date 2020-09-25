@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "esprima": "4.0.0",
-    "marked": "1.1.1"
+    "marked": "0.8.2"
   },
   "devDependencies": {
     "acquit-ignore": "0.1.0",
