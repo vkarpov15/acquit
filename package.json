@@ -30,7 +30,7 @@
     "acquit-markdown": "0.1.0",
     "acquit-require": "0.1.1",
     "highlight.js": "9.12.0",
-    "mocha": "6.x",
+    "mocha": "5.x",
     "serve": "11.x"
   }
 }
