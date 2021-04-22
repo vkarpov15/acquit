@@ -11,7 +11,7 @@
     <meta property="og:description" content="Acquit lets you generate documentation from BDD tests written for test runners like Mocha and Jasmine."></meta>
     <meta property="og:image" content="http://acquit.mongoosejs.io/logo.svg"></meta>
 
-    <script type="text/javascript" src="/docs/native.js"></script>
+    <script type="text/javascript" src="//m.servedby-buysellads.com/monetization.custom.js"></script>
   </head>
 
   <body>
@@ -86,46 +86,24 @@
   <div style="clear:both"></div>
 </div>
     </div>
-    <script type="text/javascript">
-      _native.init("CK7DT53Y", {
-        targetClass: 'native-js',
-        display: 'flex',
-        visibleClass: 'native-show'
-      });
-    </script>
-    <div class="native-js">
-      <div class="native-sponsor">Sponsored by #native_company# — Learn More</div>
-      <a href="#native_link#" class="native-flex">
-        <style>
-        .native-js {
-          background: linear-gradient(-30deg, #native_bg_color#E5, #native_bg_color#E5 45%, #native_bg_color# 45%) #fff;
-        }
-        .native-details,
-        .native-sponsor,
-        .native-bsa {
-          color: #native_color# !important;
-        }
-        .native-details:hover {
-          color: #native_color_hover# !important;
-        }
-        .native-cta {
-          color: #native_cta_color#;
-          background-color: #native_cta_bg_color#;
-        }
-        .native-cta:hover {
-          color: #native_cta_color_hover;
-          background-color: #native_cta_bg_color_hover#;
-        }
-        </style>
-        <div class="native-main">
-          <img class="native-img" src="#native_logo#">
-          <div class="native-details">
-            <span class="native-company">#native_title#</span>
-            <span class="native-desc">#native_desc#</span>
-          </div>
-        </div>
-        <span class="native-cta">#native_cta#</span>
+    <div id="native-fixed-js"></div>
+    <script>
+    (function() {
+      if (typeof _bsa !== 'undefined' && _bsa) {
+        _bsa.init('custom', 'CK7DT53Y', 'placement:mongoosejsio', {
+          target: '#native-fixed-js',
+          template: `
+    <div style="background-color: ##backgroundColor##" class="native-fixed">
+      <a style="color: ##textColor##" class="native-link" href="##link##">
+        <div class="native-sponsor" style="background-color: ##textColor##; color: ##backgroundColor##">Sponsor</div>
+        <div class="native-text">##company## — ##description##</div>
       </a>
     </div>
+        `
+        });
+      }
+    })();
+    </script>
+
   </body>
 </html>
