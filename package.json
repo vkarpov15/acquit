@@ -9,7 +9,7 @@
     "test": "mocha test/*.test.js"
   },
   "author": "Valeri Karpov <val@karpov.io>",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "keywords": [
     "documentation",
     "docs",
@@ -22,15 +22,15 @@
     "url": "git://github.com/vkarpov15/acquit.git"
   },
   "dependencies": {
-    "esprima": "4.0.0",
-    "marked": "0.7.x"
+    "esprima": "4.0.1"
   },
   "devDependencies": {
     "acquit-ignore": "0.1.0",
     "acquit-markdown": "0.1.0",
     "acquit-require": "0.1.1",
-    "highlight.js": "9.12.0",
-    "mocha": "5.x",
-    "serve": "11.x"
+    "highlight.js": "11.5.0",
+    "marked": "4.0.12",
+    "mocha": "9.2.2",
+    "serve": "13.0.2"
   }
 }
