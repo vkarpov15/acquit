@@ -1,3 +1,7 @@
+1.3.0 / 2022-02-20
+==================
+ * fix: upgrade dependencies #28 [Uzlopak](https://github.com/Uzlopak)
+
 1.2.1 / 2020-09-25
 ==================
  * fix: downgrade to marked v0.7.x for Node v4 support #25
