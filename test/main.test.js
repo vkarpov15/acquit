@@ -197,7 +197,7 @@ describe('third', () => {
   name: "My Object"
 };
 
-it("should parse spread syntax", async () => {
+it("should parse spread syntax", () => {
   const newObj = { key: { ...obj, newKey: "newValue" } };
 });`;
 
@@ -208,6 +208,39 @@ it("should parse spread syntax", async () => {
     assert.equal(ret[0].type, "it");
     assert.equal(ret[0].contents, "should parse spread syntax");
   })
+
+  it('supports async function', function () {
+    var contents = `
+it("should parse async fn", async function() {
+  await somePromise();
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse async fn");
+  });
+
+  it('supports generators', function () {
+    var contents = `
+it("should parse generator fn", function() {
+  function* someGen() {
+    yield 0;
+    yield 1;
+  }
+  const gen = someGen();
+  console.log(gen.next());
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse generator fn");
+  });
 });
 
 describe('`acquit.trimEachLine()`', function() {
