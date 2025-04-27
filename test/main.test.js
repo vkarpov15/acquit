@@ -151,6 +151,45 @@ describe('`acquit.parse()`', function() {
     assert.equal(0, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code);
   });
+
+  // https://github.com/vkarpov15/acquit/issues/30
+  it('does not carry comments from last describe block to next', function() {
+    var contents = `
+    // this is fine
+describe('first', () => {
+  it('hello', () => {
+    assert(1 == 1);
+    // some random last comment
+  });
+});
+
+describe('second', () => {
+  it('another', () => {
+    assert(2 == 2);
+  });
+});
+
+describe('third', () => {
+  it('final', () => {
+    assert(3 == 3);
+  });
+});
+    `
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 3);
+
+    assert.equal(ret[0].comments.length, 1);
+    assert.equal(ret[0].comments[0], " this is fine");
+    assert.equal(ret[0].blocks[0].comments.length, 0);
+
+    assert.equal(ret[1].comments.length, 0);
+    assert.equal(ret[1].blocks[0].comments.length, 0);
+
+    assert.equal(ret[2].comments.length, 0);
+    assert.equal(ret[2].blocks[0].comments.length, 0);
+  })
 });
 
 describe('`acquit.trimEachLine()`', function() {
