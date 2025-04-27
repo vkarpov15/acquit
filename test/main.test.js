@@ -190,6 +190,24 @@ describe('third', () => {
     assert.equal(ret[2].comments.length, 0);
     assert.equal(ret[2].blocks[0].comments.length, 0);
   })
+
+  it('supports spread operator', function() {
+    var contents = `
+    const obj = {
+  name: "My Object"
+};
+
+it("should parse spread syntax", async () => {
+  const newObj = { key: { ...obj, newKey: "newValue" } };
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse spread syntax");
+  })
 });
 
 describe('`acquit.trimEachLine()`', function() {
