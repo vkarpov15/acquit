@@ -1,4 +1,8 @@
-1.3.0 / 2022-02-20
+1.4.0 / 2025-05-06
+==================
+ * feat: switch to espree for modern JS syntax support #32 #30 [hasezoey](https://github.com/hasezoey)
+
+1.3.0 / 2023-02-20
 ==================
  * fix: upgrade dependencies #28 [Uzlopak](https://github.com/Uzlopak)
 
