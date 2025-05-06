@@ -1,5 +1,4 @@
 var assert = require('assert');
-var fs = require('fs');
 var acquit = require('../lib');
 
 describe('`acquit.parse()`', function() {
@@ -33,13 +32,14 @@ describe('`acquit.parse()`', function() {
     assert.equal(1, ret.length);
     assert.equal('describe', ret[0].type);
     assert.equal(1, ret[0].comments.length);
-    assert.ok(ret[0].comments[0].indexOf('Model') != -1);
+    assert.ok(ret[0].comments[0].indexOf('convenience') != -1);
 
     // Top-level block contains the `it('can save')` block, which contains
     // the code
     assert.equal(2, ret[0].blocks.length);
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(1, ret[0].blocks[0].comments.length);
+    assert.ok(ret[0].blocks[0].comments[0].indexOf('**should**') != -1);
     assert.ok(ret[0].blocks[0].code.indexOf('assert.ok(1)') !== -1);
     assert.equal('can save', ret[0].blocks[0].contents);
 
@@ -150,6 +150,96 @@ describe('`acquit.parse()`', function() {
     assert.equal('it', ret[0].blocks[0].type);
     assert.equal(0, ret[0].blocks[0].comments.length);
     assert.ok(ret[0].blocks[0].code);
+  });
+
+  // https://github.com/vkarpov15/acquit/issues/30
+  it('does not carry comments from last describe block to next', function() {
+    var contents = `
+    // this is fine
+describe('first', () => {
+  it('hello', () => {
+    assert(1 == 1);
+    // some random last comment
+  });
+});
+
+describe('second', () => {
+  it('another', () => {
+    assert(2 == 2);
+  });
+});
+
+describe('third', () => {
+  it('final', () => {
+    assert(3 == 3);
+  });
+});
+    `
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 3);
+
+    assert.equal(ret[0].comments.length, 1);
+    assert.equal(ret[0].comments[0], " this is fine");
+    assert.equal(ret[0].blocks[0].comments.length, 0);
+
+    assert.equal(ret[1].comments.length, 0);
+    assert.equal(ret[1].blocks[0].comments.length, 0);
+
+    assert.equal(ret[2].comments.length, 0);
+    assert.equal(ret[2].blocks[0].comments.length, 0);
+  })
+
+  it('supports spread operator', function() {
+    var contents = `
+    const obj = {
+  name: "My Object"
+};
+
+it("should parse spread syntax", () => {
+  const newObj = { key: { ...obj, newKey: "newValue" } };
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse spread syntax");
+  })
+
+  it('supports async function', function () {
+    var contents = `
+it("should parse async fn", async function() {
+  await somePromise();
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse async fn");
+  });
+
+  it('supports generators', function () {
+    var contents = `
+it("should parse generator fn", function() {
+  function* someGen() {
+    yield 0;
+    yield 1;
+  }
+  const gen = someGen();
+  console.log(gen.next());
+});`;
+
+    var ret = acquit.parse(contents);
+
+    assert.equal(ret.length, 1);
+
+    assert.equal(ret[0].type, "it");
+    assert.equal(ret[0].contents, "should parse generator fn");
   });
 });
 

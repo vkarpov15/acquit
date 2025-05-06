@@ -22,7 +22,10 @@
     "url": "git://github.com/vkarpov15/acquit.git"
   },
   "dependencies": {
-    "esprima": "4.0.1"
+    "espree": "~9.6.1"
+  },
+  "engines": {
+    "node": ">=12.22.0"
   },
   "devDependencies": {
     "acquit-ignore": "0.1.0",
